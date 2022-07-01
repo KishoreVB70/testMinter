@@ -6,10 +6,10 @@ function App() {
 
   //State Variables
   let contractAddress = "0xDB12c1eBe26987E388c8Cd2A112fA92beFbB8BD1";
-  let LoanAddress = "0x3e07623303f3e21491748414c73516c92cc43ADb";
   const [walletConnected, setWalletConnected] = useState("");
   const [nftID, setNftId] = useState("");
   const [inputToken, setInputToken] = useState("");
+  const [inputAddress, setinputAddress] = useState("");
 
   //Code which is used to create the contract instance everytime
   const connectToContract = async() => {
@@ -69,7 +69,7 @@ function App() {
 
   const getApproval = async() => {
     const contract = await connectToContract();
-    await contract.approve(LoanAddress, inputToken);
+    await contract.approve(inputAddress, inputToken);
   }
   const mintNFT = async() => {
     const {ethereum} = window;
@@ -117,6 +117,7 @@ function App() {
             <button onClick={mintNFT} className='mintButton' >Mint an NFT</button>
             <p>Click here to give approval to the Loan contract 👇</p>
             <input placeholder='token Id' value={inputToken}  onChange={(e) => setInputToken(e.target.value)} />
+            <input placeholder='Contract Address' value={inputAddress}  onChange={(e) => setinputAddress(e.target.value)} />
             <button onClick={getApproval} >Give Approval</button>
           </div>
         )
